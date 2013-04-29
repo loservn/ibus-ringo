@@ -1,4 +1,5 @@
-(ns bogo.accent)
+(ns bogo.accent
+  (:require [clojure.set]))
 
 (def vowels
   ["aàáảãạ",
@@ -14,6 +15,12 @@
    "ưừứửữự",
    "yỳýỷỹỵ"])
 
+(def keyword-accent
+  (zipmap [:none :grave :acute :hook :tilde :dot] (range 6)))
+
+(def accent-keyword
+  (clojure.set/map-invert keyword-accent))
+
 (defn contains-char? [the-string, the-char]
   (some #(= the-char %) the-string))
 
@@ -23,14 +30,11 @@
   [chr]
   (first (filter #(contains-char? %1 chr) vowels)))
 
-(defn- convert-accent-keyword [kw]
-  ((zipmap [:none :grave :acute :hook :tilde :dot] (range 6)) kw))
-
 (defn add-accent-char
   "Adds an accent to a given char. Also remove any accent if the given accent is
   Accent.NONE"
   [chr accent]
-  (get (get-vowel-family chr) (convert-accent-keyword accent) chr))
+  (get (get-vowel-family chr) (keyword-accent accent) chr))
 
 (defn vowel?
   "doc-string"
@@ -66,3 +70,14 @@
         vowel)
       _last]))))
 
+(defn get-accent-char
+  "doc-string"
+  [chr]
+  (get accent-keyword
+    (.lastIndexOf
+      (or (get-vowel-family chr) "")
+      (str chr)) :none))
+
+(defn get-last-accent-string
+  [string]
+  (first (drop-while #{:none} (reverse (map get-accent-char string)))))
