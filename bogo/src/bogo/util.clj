@@ -1,5 +1,7 @@
 (ns bogo.util)
 
+(defmacro dbg[x] `(let [x# ~x] (println "dbg:" '~x "=" x#) x#))
+
 (def vowels
   ["aàáảãạ",
    "ăằắẳẵặ",
