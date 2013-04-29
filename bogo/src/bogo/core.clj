@@ -1,6 +1,7 @@
 (ns bogo.core
   (:require [bogo.accent :refer :all]
-            [bogo.mark :refer :all]))
+            [bogo.mark :refer :all]
+            [bogo.util :refer :all]))
 
 (def simple-telex {
             "a" ["a^"]
@@ -14,9 +15,6 @@
             "x" ["~"]
             "j" ["."]
         })
-
-(defn in? [item collection]
-  (some #{item} collection))
 
 (defn interpret-viqr
   "doc-string"

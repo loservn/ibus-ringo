@@ -1,28 +1,12 @@
 (ns bogo.accent
-  (:require [clojure.set]))
-
-(def vowels
-  ["aàáảãạ",
-   "ăằắẳẵặ",
-   "âầấẩẫậ",
-   "eèéẻẽẹ",
-   "êềếểễệ",
-   "iìíỉĩị",
-   "oòóỏõọ",
-   "ôồốổỗộ",
-   "ơờớởỡợ",
-   "uùúủũụ",
-   "ưừứửữự",
-   "yỳýỷỹỵ"])
+  (:require [clojure.set]
+            [bogo.util :refer :all]))
 
 (def keyword-accent
   (zipmap [:none :grave :acute :hook :tilde :dot] (range 6)))
 
 (def accent-keyword
   (clojure.set/map-invert keyword-accent))
-
-(defn contains-char? [the-string, the-char]
-  (some #(= the-char %) the-string))
 
 (defn get-vowel-family
   "Returns the family if the vowel is in one of the vowel families, nil
@@ -35,23 +19,6 @@
   Accent.NONE"
   [chr accent]
   (get (get-vowel-family chr) (keyword-accent accent) chr))
-
-(defn vowel?
-  "doc-string"
-  [chr]
-  (some #(contains-char? %1 chr) vowels))
-
-(defn separate
-  "Separate a string into 3 parts - :head, :vowel and :last.
-  Eg.
-  > (separate \"chuyen\"
-    {:last (n), :vowel (u y e), :head (c h)}"
-  [string]
-  (let
-      [rstring (reverse string)
-      [last-consonant stuff] (split-with (comp not vowel?) rstring)
-      [vowel head] (split-with vowel? stuff)]
-    (zipmap [:head :vowel :last] (map reverse [head vowel last-consonant]))))
 
 (defn add-accent-string
   "doc-string"
