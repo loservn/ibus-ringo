@@ -76,4 +76,10 @@
 (defn process-seq
   "Process a key sequence."
   [key-sequence]
-  (reduce process-key "" (seq key-sequence)))
+  (reduce
+    (fn [string current-key]
+      (let [[tail head] (map (comp (partial apply str) reverse) (split-with (complement word-boundary?) (reverse string)))]
+        (str head (process-key tail current-key))
+        ))
+    ""
+    (seq key-sequence)))
