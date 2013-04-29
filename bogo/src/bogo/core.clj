@@ -17,7 +17,8 @@
         })
 
 (defn interpret-viqr
-  "doc-string"
+  "Parses an atomic VIQR-like string and returns a map indicating the necessary
+  operation and arguments going with it."
   [string]
   (case (count string)
     1 {:action :add-accent
@@ -40,7 +41,7 @@
         {:action nil}))))
 
 (defn execute-operation
-  "doc-string"
+  "Execute the operation parsed by `interpret-viqr` on the given string."
   [string operation]
   (case (operation :action)
     :add-accent (add-accent-string string (operation :accent))
@@ -53,12 +54,14 @@
     :append-char (str string (operation :char))))
 
 (defn get-transformation-list
-  "doc-string"
+  "Finds the list of possible transformations written in a VIQR-like syntax that
+  a keypress can generate. Returns an empty list if no transformation is defined
+  for that key."
   [chr input-method-map]
   (get input-method-map chr []))
 
 (defn process-key
-  "doc-string"
+  "Process a single keypress."
   [string chr]
   (let [result (reduce
       execute-operation
@@ -71,5 +74,6 @@
       result)))
 
 (defn process-seq
+  "Process a key sequence."
   [key-sequence]
   (reduce process-key "" (seq key-sequence)))
