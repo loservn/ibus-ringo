@@ -44,7 +44,12 @@
   [string operation]
   (case (operation :action)
     :add-accent (add-accent-string string (operation :accent))
-    :add-mark (add-mark-string string (operation :mark) (operation :target))
+    :add-mark (add-accent-string
+      (add-mark-string
+        (add-accent-string string :none)
+        (operation :mark)
+        (operation :target))
+      (get-last-accent-string string))
     :append-char (str string (operation :char))))
 
 (defn get-transformation-list
