@@ -2,7 +2,8 @@
 
 (def mark-afinity {
   :hat   {:family-a "â"
-          :family-o "ô"}
+          :family-o "ô"
+          :family-e "ê"}
   :horn  {:family-o "ơ"
           :family-u "ư"}
   :breve {:family-a "ă"}
