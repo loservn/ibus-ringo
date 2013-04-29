@@ -12,7 +12,7 @@
   "Returns the family if the vowel is in one of the vowel families, nil
   otherwise."
   [chr]
-  (first (filter #(contains-char? %1 chr) vowels)))
+  (first (filter #(in? chr %1) vowels)))
 
 (defn add-accent-char
   "Adds an accent to a given char. Also remove any accent if the given accent is
@@ -27,11 +27,17 @@
     (apply str (map #(apply str %)
       [head
       (case (count vowel)
+        ; single vowel
         1 [(add-accent-char (first vowel) accent)]
-        2 (if (and (= (last vowel) \y) (not (some #{(first vowel)} [\o \u])))
+        ; For double vowel ending in [\y \i \u \o] with no last consonant, add
+        ; the accent to the first vowel (cay, bai, bau, bao,...) else to the
+        ; second one (qua, khoe, khoan,..).
+        2 (if (and (in? (last vowel) [\y \i \u \o]) (empty? _last))
             [(add-accent-char (first vowel) accent) (last vowel)]
             [(first vowel) (add-accent-char (last vowel) accent)])
-        3 (if (some #{(last vowel)} [\o \i \u])
+        ; Triple? Add to second-to-last if ending in [\o \i \u] (khoeo, khoai)
+        ; else to last (chuyen, tuyet).
+        3 (if (in? (last vowel) [\o \i \u])
           [(first vowel) (add-accent-char (nth vowel 1) accent) (last vowel)]
           (concat (butlast vowel) [(add-accent-char (last vowel) accent)]))
         vowel)
