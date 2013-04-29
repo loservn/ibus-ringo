@@ -55,7 +55,7 @@
 (defn get-transformation-list
   "doc-string"
   [chr input-method-map]
-  (get input-method-map chr [(str "+" chr)]))
+  (get input-method-map chr []))
 
 (defn process-key
   "doc-string"
