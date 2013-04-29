@@ -4,10 +4,19 @@
   :hat   {:family-a \â
           :family-o \ô
           :family-e \ê}
+
   :horn  {:family-o \ơ
           :family-u \ư}
+
   :breve {:family-a \ă}
-  :bar   {:family-d \đ}})
+
+  :bar   {:family-d \đ}
+
+  :none  {:family-a \a
+          :family-o \o
+          :family-e \e
+          :family-d \d
+          :family-u \u}})
 
 (defn get-family
   "doc-string"
