@@ -16,20 +16,17 @@
    "ưừứửữự",
    "yỳýỷỹỵ"])
 
-(defn contains-char? [the-string, the-char]
-  (some #(= the-char %) the-string))
+(defn in? [item collection]
+  (some #{item} collection))
 
 (defn vowel?
   "doc-string"
   [chr]
-  (some #(contains-char? %1 chr) vowels))
-
-(defn in? [item collection]
-  (some #{item} collection))
+  (some #(in? chr %1) vowels))
 
 (defn word-boundary?
   [chr]
-  )
+  (in? chr [\space \. \, \!]))
 
 (defn separate
   "Separate a string into 3 parts - :head, :vowel and :last.
