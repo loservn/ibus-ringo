@@ -11,9 +11,9 @@
 
 (deftest test-add-mark-string
   (testing "Single char."
-    (is (= (add-mark-string "a" :hat) "â")))
+    (is (= (add-mark-string "a" :hat "a") "â")))
   (testing "Long string."
-    (is (= (add-mark-string "trang" :breve) "trăng"))
-    (is (= (add-mark-string "dêm" :bar) "đêm")))
+    (is (= (add-mark-string "trang" :breve "a") "trăng"))
+    (is (= (add-mark-string "dêm" :bar "d") "đêm")))
   (testing "Impossible combinations."
-    (is (= (add-mark-string "a" :horn) "a"))))
+    (is (= (add-mark-string "a" :horn "a") "a"))))

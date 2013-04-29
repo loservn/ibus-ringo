@@ -9,13 +9,6 @@
   :breve {:family-a \ă}
   :bar   {:family-d \đ}})
 
-(def mark-raw-affinity {
-  :hat ["a" "o" "e"]
-  :horn ["o" "u"]
-  :breve ["a"]
-  :bar ["d"]
-  })
-
 (defn get-family
   "doc-string"
   [chr]
@@ -33,11 +26,10 @@
   (get (get mark-affinity mark) (get-family chr) chr))
 
 (defn add-mark-string
-  "doc-string"
-  [string mark]
-  ; find the last possible raw char that can go with the given mark in the string
-  (let [idx (apply max
-              (map #(.lastIndexOf string %) (mark-raw-affinity mark)))]
+  "Add a mark to a string. The mark can only be added if 'target' appears in the
+  string."
+  [string mark target]
+  (let [idx (.lastIndexOf string target)]
     (if (not= idx -1)
       (apply str
         (concat
