@@ -37,8 +37,9 @@
 (defn add-mark-string
   "Add a mark to a string. The mark can only be added if 'target' appears in the
   string."
+  ; be careful not to be too rigid with target (ơ -> ô). Only family target perhaps?
   [string mark target]
-  (let [idx (.lastIndexOf string target)]
+  (let [idx (.lastIndexOf string (str target))]
     (if (not= idx -1)
       (apply str
         (concat
