@@ -36,8 +36,9 @@
   [string]
   (let
       [rstring (reverse string)
-      [last-consonant stuff] (split-with (comp not vowel?) rstring)
-      [vowel head] (split-with vowel? stuff)]
+        [last-consonant stuff] (split-with (comp not vowel?) rstring)
+        [vowel head] (let [[vowel- head-] (split-with vowel? stuff)]
+                  (if (= (str (first head-) (last vowel-)) "qu")
+                    [(butlast vowel-) (cons "u" head-)]
+                    [vowel- head-]))]
     (zipmap [:head :vowel :last] (map reverse [head vowel last-consonant]))))
-
-
