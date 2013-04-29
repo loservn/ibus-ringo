@@ -67,3 +67,6 @@
       (execute-operation string (interpret-viqr (str "+" chr)))
       result)))
 
+(defn process-seq
+  [key-sequence]
+  (reduce process-key "" (seq key-sequence)))
