@@ -23,11 +23,14 @@
   [chr]
   (first (filter #(contains-char? %1 chr) vowels)))
 
+(defn- convert-accent-keyword [kw]
+  ((zipmap [:none :grave :acute :hook :tilde :dot] (range 6)) kw))
+
 (defn add-accent-char
   "Adds an accent to a given char. Also remove any accent if the given accent is
   Accent.NONE"
   [chr accent]
-  (get (get-vowel-family chr) accent chr))
+  (get (get-vowel-family chr) (convert-accent-keyword accent) chr))
 
 (defn vowel?
   "doc-string"
