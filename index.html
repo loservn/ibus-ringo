@@ -16,116 +16,57 @@
     <div class="wrapper">
       <header>
         <h1>Ringo</h1>
-        <p>Vietnamese input method. IBus integration part.</p>
+        <p>Bộ gõ tiếng Việt cho IBus.</p>
 
-        <p class="view"><a href="https://github.com/lewtds/ibus-ringo">View the Project on GitHub <small>lewtds/ibus-ringo</small></a></p>
+        <p class="view"><a href="https://github.com/lewtds/ibus-ringo">Mở trang GitHub <small>lewtds/ibus-ringo</small></a></p>
 
-
-        <ul>
-          <li><a href="https://github.com/lewtds/ibus-ringo/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/lewtds/ibus-ringo/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/lewtds/ibus-ringo">View On <strong>GitHub</strong></a></li>
-        </ul>
       </header>
       <section>
-        <h1>
-<a name="b%E1%BB%99-g%C3%B5-ti%E1%BA%BFng-vi%E1%BB%87t-cho-ibus--" class="anchor" href="#b%E1%BB%99-g%C3%B5-ti%E1%BA%BFng-vi%E1%BB%87t-cho-ibus--"><span class="octicon octicon-link"></span></a>Bộ gõ tiếng Việt cho iBus <a href="https://travis-ci.org/BoGoEngine/ibus-bogo-python"><img src="https://travis-ci.org/BoGoEngine/ibus-bogo-python.png" alt="Build Status"></a> <a href="http://waffle.io/bogoengine/ibus-bogo-python"><img src="https://badge.waffle.io/bogoengine/ibus-bogo-python.png?label=ready" alt="Stories in Ready"></a>
-</h1>
 
-<p><a href="#introduction"><em>English below...</em></a></p>
-
-<p><strong>ibus-bogo</strong> là một chương trình xử lý gõ tiếng Việt sử dụng engine <strong>BoGo</strong>
-và được thiết kế để chạy cùng <a href="http://code.google.com/p/ibus/">iBus</a>,
+<p><strong>ibus-ringo</strong> là một chương trình xử lý gõ tiếng Việt sử dụng engine <strong>BoGo</strong>
+và được thiết kế để chạy cùng <a href="http://code.google.com/p/ibus/">IBus</a>,
 một phần mềm quản lý các bộ gõ trong GNU/Linux.</p>
 
-<h2>
-<a name="h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-nhanh" class="anchor" href="#h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-nhanh"><span class="octicon octicon-link"></span></a>Hướng dẫn nhanh</h2>
+<p>Copy và chạy lệnh sau trong terminal để cài đặt:</p>
+<pre>curl http://bit.ly/getringo | bash</pre>
 
-<ol>
-<li><p><a href="doc/sphinx/install.rst">Cài đặt</a> và sử dụng</p></li>
-<li><p>Chia sẻ cho người thân</p></li>
-<li><p>Trò chuyện với chúng tôi ở <a href="http://en.wikipedia.org/wiki/Free_and_open_source_software">mailing list của nhóm</a> hay chat qua <a href="https://kiwiirc.com/client/chat.freenode.net/?nick=bogo-user%7C?&amp;theme=basic#bogo">kênh #bogo</a> trên mạng IRC Freenode.</p></li>
-<li><p><a href="https://github.com/BoGoEngine/ibus-bogo-python/issues?state=open">Thông báo lỗi và đóng góp ý tưởng</a></p></li>
-<li><p>Fork, vọc code và <a href="doc/sphinx/contributing.rst">tham gia phát triển cùng chúng tôi</a>!</p></li>
-</ol><h2>
-<a name="gi%E1%BA%A5y-ph%C3%A9p-s%E1%BB%AD-d%E1%BB%A5ng" class="anchor" href="#gi%E1%BA%A5y-ph%C3%A9p-s%E1%BB%AD-d%E1%BB%A5ng"><span class="octicon octicon-link"></span></a>Giấy phép sử dụng</h2>
-
-<p><strong>ibus-bogo</strong> là
-<a href="http://en.wikipedia.org/wiki/Free_and_open_source_software">phần mềm tự do nguồn mở</a>.</p>
-
-<p>Toàn bộ mã nguồn của <strong>ibus-bogo</strong> và <strong>BoGoEngine</strong> cùng tất
-cả các tài nguyên đi kèm đều được phát hành dưới các quy định ghi
-trong Giấy phép Công cộng GNU, phiên bản 3.0 (GNU General Public
-License v3.0).  Xem tệp <a href="COPYING">COPYING</a> để biết thêm chi tiết.</p>
-
-<h2>
-<a name="c%E1%BA%A3m-%C6%A1n" class="anchor" href="#c%E1%BA%A3m-%C6%A1n"><span class="octicon octicon-link"></span></a>Cảm ơn</h2>
-
-<p><strong>ibus-bogo</strong> đang được duy trì và phát triển bởi Ngô "Chin" Trung
-(nick <a href="https://github.com/lewtds/">@lewtds</a> trên Github).</p>
-
-<p>Nhóm phát triển xin chân thành gửi lời cảm ơn đặc biệt đến:</p>
-
+<h3>Tại sao lại dùng Ringo?</h3>
 <ul>
-<li><a href="https://github.com/CMPITG">Nguyễn Hà Dương</a></li>
-<li><a href="https://github.com/haqduong">Hà Quang Dương</a></li>
-<li><a href="https://github.com/hainp">Nguyễn Phan Hải</a></li>
-<li><a href="https://github.com/phaikawl">Nguyễn Thành Hải</a></li>
-<li><a href="https://github.com/NgoHuy">Ngô Huy</a></li>
-<li><a href="https://github.com/fuzzysource">Đàm Tiến Long</a></li>
-<li><a href="https://github.com/Narga">Nguyễn Đình Quân</a></li>
-<li>
-<a href="https://github.com/sokomo">Duc Tran</a> (a.k.a. kitarousa)</li>
-<li><a href="https://github.com/tuanta">Trương Anh Tuấn</a></li>
-</ul><p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/BoGoEngine/ibus-bogo-python/trend.png" alt="Bitdeli Badge"></a></p>
+	<li>
+		<p>Vì Ringo nhận dạng từ không phải tiếng Việt thông minh hơn.</p>
+		<img src="img/skip_non_vietnamese.gif"></img>
+	</li>
+	<li>Vì Ringo không hiện gạch chân khi gõ.</li>
+	<li>
+		<p>Vì Ringo cho phép gõ dấu tiếp ở bất kỳ đâu.</p>
+		<p>Giả sử trong gedit đã có từ "dường đi" và con trỏ đang ở sau chữ "đi". Nếu đặt lại con trỏ vào sau chữ "dường" và gõ "d" thì có thể gõ tiếp thành "đường".</p>
+	</li>
+	<li>Vì Ringo đang được phát triển không ngừng.</li>
+</ul>
 
-<hr><h2>
-<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+<h3>Tôi thấy hiện gạch chân cũng chả sao</h3>
 
-<p><strong>ibus-bogo</strong> is a Vietnamese input engine targeting
-<a href="http://code.google.com/p/ibus/">IBus</a>, an input method manager in GNU/Linux
-environments.</p>
+<p>
+Phương pháp gõ bằng cách hiện gạch chân (gọi là preedit) được sử dụng bởi phần lớn các bộ gõ tiếng nước ngoài và cả ibus-unikey.
+Nó có nhiều điểm bất lợi dễ thấy như bị hiện password khi đang gõ trong terminal, không kích hoạt các hành động phụ trợ
+như gợi ý từ, tìm kiếm tự động. Tuy nhiên điểm khó chịu nhất là người dùng phải có một thao tác "chấp nhận" chuỗi đã gõ bằng
+cách nhấn phím đặc biệt như phím cách, Enter, Control hay các phím dấu câu. IBus Ringo giải quyết vấn đề này bằng cách
+sử dụng một tính năng khác của IBus là surrounding text, cho phép bộ gõ có thể đọc/ghi trực tiếp vào văn bản xung quanh
+con trỏ, tạo ra cảm giác gõ tự nhiên hơn như Unikey trên Windows. Tuy nhiên, với một số ứng dụng chưa hỗ trợ surrounding
+text thì IBus Ringo vẫn sẽ sử dụng preedit. Nhược điểm này sẽ được khắc phục dần dần. Xem <a href="https://github.com/lewtds/ibus-ringo/issues/4">issue #4</a>.
+</p>
 
-<h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
+<h3>Tôi muốn Ringo có thêm tính năng x, y, z,...</h3>
+<p>
+Hiện tại Ringo đang rất hạn chế về nhân lực do chỉ có một người phát triển chính. Nếu bạn có thể sử dụng ngôn ngữ Python
+thì hoàn toàn có thể tự mình đóng góp phát triển cho dự án. Xin tham khảo <a href="http://ibus-bogo.readthedocs.org/en/latest/contributing.html">tài liệu hướng dẫn cho lập trình viên</a>.
+</p>
+<p>Tuy nhiên, bạn cũng có thể đóng góp theo những cách đơn giản hơn như sử dụng phiên bản unstable và thông báo lỗi, viết hướng dẫn sử dụng, viết blog, chia sẻ với bạn bè và người thân về bộ gõ tiếng Việt này.</p>
 
-<ol>
-<li><p><a href="doc/INSTALL.md">Install</a> and use just like any other IBus engine</p></li>
-<li><p>Share</p></li>
-<li><p>Talk to us at
-<a href="https://groups.google.com/forum/?fromgroups#!forum/bogoengine-dev">our mailing list</a>
-and IRC channel at <a href="https://kiwiirc.com/client/chat.freenode.net/?nick=bogo-user%7C?&amp;theme=basic#bogo">#bogo on Freenode</a>.</p></li>
-<li><p><a href="https://github.com/BoGoEngine/ibus-bogo-python/issues?state=open">Report bugs and share suggestions</a></p></li>
-<li><p>Fork and <a href="doc/CONTRIBUTE.md">contribute</a></p></li>
-</ol><h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
-
-<p><strong>ibus-bogo</strong> is <a href="http://en.wikipedia.org/wiki/Free_and_open_source_software">free and open source software</a>
-and is released under the GNU General Public License v3.0.</p>
-
-<h2>
-<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
-
-<p><strong>ibus-bogo</strong> is actively maintained by Trung "Chin" Ngô
-(<a href="https://github.com/lewtds/">@lewtds</a> on Github).</p>
-
-<p>We would like to give thanks to:</p>
-
-<ul>
-<li><a href="https://github.com/CMPITG">Nguyễn Hà Dương</a></li>
-<li><a href="https://github.com/haqduong">Hà Quang Dương</a></li>
-<li><a href="https://github.com/hainp">Nguyễn Phan Hải</a></li>
-<li><a href="https://github.com/phaikawl">Nguyễn Thành Hải</a></li>
-<li><a href="https://github.com/NgoHuy">Ngô Huy</a></li>
-<li><a href="https://github.com/fuzzysource">Đàm Tiến Long</a></li>
-<li><a href="https://github.com/Narga">Nguyễn Đình Quân</a></li>
-<li>
-<a href="https://github.com/sokomo">Duc Tran</a> (a.k.a. kitarousa)</li>
-<li><a href="https://github.com/tuanta">Trương Anh Tuấn</a></li>
-</ul><p>for their contributions to the project, in one way or another.</p>
+<p>Hãy trò chuyện với chúng tôi thông qua IRC ở kênh #bogo trên mạng Freenode nếu bạn có mong muốn giúp sức. Mọi sự đóng góp của các bạn dù dưới hình thức nào cũng đều được chúng tôi hết sức trân trọng.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/lewtds">lewtds</a></p>
+        <p>Dự án này được phát triển và duy trì bởi <a href="https://github.com/lewtds">lewtds</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
