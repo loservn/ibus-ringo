@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ringo by lewtds</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Ringo</h1>
+        <p>Vietnamese input method. IBus integration part.</p>
+
+        <p class="view"><a href="https://github.com/lewtds/ibus-ringo">View the Project on GitHub <small>lewtds/ibus-ringo</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/lewtds/ibus-ringo/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/lewtds/ibus-ringo/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/lewtds/ibus-ringo">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="b%E1%BB%99-g%C3%B5-ti%E1%BA%BFng-vi%E1%BB%87t-cho-ibus--" class="anchor" href="#b%E1%BB%99-g%C3%B5-ti%E1%BA%BFng-vi%E1%BB%87t-cho-ibus--"><span class="octicon octicon-link"></span></a>Bộ gõ tiếng Việt cho iBus <a href="https://travis-ci.org/BoGoEngine/ibus-bogo-python"><img src="https://travis-ci.org/BoGoEngine/ibus-bogo-python.png" alt="Build Status"></a> <a href="http://waffle.io/bogoengine/ibus-bogo-python"><img src="https://badge.waffle.io/bogoengine/ibus-bogo-python.png?label=ready" alt="Stories in Ready"></a>
+</h1>
+
+<p><a href="#introduction"><em>English below...</em></a></p>
+
+<p><strong>ibus-bogo</strong> là một chương trình xử lý gõ tiếng Việt sử dụng engine <strong>BoGo</strong>
+và được thiết kế để chạy cùng <a href="http://code.google.com/p/ibus/">iBus</a>,
+một phần mềm quản lý các bộ gõ trong GNU/Linux.</p>
+
+<h2>
+<a name="h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-nhanh" class="anchor" href="#h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-nhanh"><span class="octicon octicon-link"></span></a>Hướng dẫn nhanh</h2>
+
+<ol>
+<li><p><a href="doc/sphinx/install.rst">Cài đặt</a> và sử dụng</p></li>
+<li><p>Chia sẻ cho người thân</p></li>
+<li><p>Trò chuyện với chúng tôi ở <a href="http://en.wikipedia.org/wiki/Free_and_open_source_software">mailing list của nhóm</a> hay chat qua <a href="https://kiwiirc.com/client/chat.freenode.net/?nick=bogo-user%7C?&amp;theme=basic#bogo">kênh #bogo</a> trên mạng IRC Freenode.</p></li>
+<li><p><a href="https://github.com/BoGoEngine/ibus-bogo-python/issues?state=open">Thông báo lỗi và đóng góp ý tưởng</a></p></li>
+<li><p>Fork, vọc code và <a href="doc/sphinx/contributing.rst">tham gia phát triển cùng chúng tôi</a>!</p></li>
+</ol><h2>
+<a name="gi%E1%BA%A5y-ph%C3%A9p-s%E1%BB%AD-d%E1%BB%A5ng" class="anchor" href="#gi%E1%BA%A5y-ph%C3%A9p-s%E1%BB%AD-d%E1%BB%A5ng"><span class="octicon octicon-link"></span></a>Giấy phép sử dụng</h2>
+
+<p><strong>ibus-bogo</strong> là
+<a href="http://en.wikipedia.org/wiki/Free_and_open_source_software">phần mềm tự do nguồn mở</a>.</p>
+
+<p>Toàn bộ mã nguồn của <strong>ibus-bogo</strong> và <strong>BoGoEngine</strong> cùng tất
+cả các tài nguyên đi kèm đều được phát hành dưới các quy định ghi
+trong Giấy phép Công cộng GNU, phiên bản 3.0 (GNU General Public
+License v3.0).  Xem tệp <a href="COPYING">COPYING</a> để biết thêm chi tiết.</p>
+
+<h2>
+<a name="c%E1%BA%A3m-%C6%A1n" class="anchor" href="#c%E1%BA%A3m-%C6%A1n"><span class="octicon octicon-link"></span></a>Cảm ơn</h2>
+
+<p><strong>ibus-bogo</strong> đang được duy trì và phát triển bởi Ngô "Chin" Trung
+(nick <a href="https://github.com/lewtds/">@lewtds</a> trên Github).</p>
+
+<p>Nhóm phát triển xin chân thành gửi lời cảm ơn đặc biệt đến:</p>
+
+<ul>
+<li><a href="https://github.com/CMPITG">Nguyễn Hà Dương</a></li>
+<li><a href="https://github.com/haqduong">Hà Quang Dương</a></li>
+<li><a href="https://github.com/hainp">Nguyễn Phan Hải</a></li>
+<li><a href="https://github.com/phaikawl">Nguyễn Thành Hải</a></li>
+<li><a href="https://github.com/NgoHuy">Ngô Huy</a></li>
+<li><a href="https://github.com/fuzzysource">Đàm Tiến Long</a></li>
+<li><a href="https://github.com/Narga">Nguyễn Đình Quân</a></li>
+<li>
+<a href="https://github.com/sokomo">Duc Tran</a> (a.k.a. kitarousa)</li>
+<li><a href="https://github.com/tuanta">Trương Anh Tuấn</a></li>
+</ul><p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/BoGoEngine/ibus-bogo-python/trend.png" alt="Bitdeli Badge"></a></p>
+
+<hr><h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p><strong>ibus-bogo</strong> is a Vietnamese input engine targeting
+<a href="http://code.google.com/p/ibus/">IBus</a>, an input method manager in GNU/Linux
+environments.</p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
+
+<ol>
+<li><p><a href="doc/INSTALL.md">Install</a> and use just like any other IBus engine</p></li>
+<li><p>Share</p></li>
+<li><p>Talk to us at
+<a href="https://groups.google.com/forum/?fromgroups#!forum/bogoengine-dev">our mailing list</a>
+and IRC channel at <a href="https://kiwiirc.com/client/chat.freenode.net/?nick=bogo-user%7C?&amp;theme=basic#bogo">#bogo on Freenode</a>.</p></li>
+<li><p><a href="https://github.com/BoGoEngine/ibus-bogo-python/issues?state=open">Report bugs and share suggestions</a></p></li>
+<li><p>Fork and <a href="doc/CONTRIBUTE.md">contribute</a></p></li>
+</ol><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><strong>ibus-bogo</strong> is <a href="http://en.wikipedia.org/wiki/Free_and_open_source_software">free and open source software</a>
+and is released under the GNU General Public License v3.0.</p>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p><strong>ibus-bogo</strong> is actively maintained by Trung "Chin" Ngô
+(<a href="https://github.com/lewtds/">@lewtds</a> on Github).</p>
+
+<p>We would like to give thanks to:</p>
+
+<ul>
+<li><a href="https://github.com/CMPITG">Nguyễn Hà Dương</a></li>
+<li><a href="https://github.com/haqduong">Hà Quang Dương</a></li>
+<li><a href="https://github.com/hainp">Nguyễn Phan Hải</a></li>
+<li><a href="https://github.com/phaikawl">Nguyễn Thành Hải</a></li>
+<li><a href="https://github.com/NgoHuy">Ngô Huy</a></li>
+<li><a href="https://github.com/fuzzysource">Đàm Tiến Long</a></li>
+<li><a href="https://github.com/Narga">Nguyễn Đình Quân</a></li>
+<li>
+<a href="https://github.com/sokomo">Duc Tran</a> (a.k.a. kitarousa)</li>
+<li><a href="https://github.com/tuanta">Trương Anh Tuấn</a></li>
+</ul><p>for their contributions to the project, in one way or another.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/lewtds">lewtds</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-49737813-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
