@@ -4,6 +4,7 @@ DISTRO=`lsb_release --short --id`
 DISTRO_VERSION=`lsb_release --short --release`
 BASE=/home/$SUDO_USER/.local/share/ibus-bogo
 REPO=https://github.com/lewtds/ibus-ringo
+RED="\e[1;31m"
 
 LICENSE='Xin chào, đây là bộ cài đặt ibus-ringo, một phần mềm tự do nguồn mở.
 để sử dụng, bạn cần đồng ý với những điều khoản sau.
