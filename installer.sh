@@ -2,7 +2,7 @@
 
 DISTRO=`lsb_release --short --id`
 DISTRO_VERSION=`lsb_release --short --release`
-BASE=~/.local/share/ibus-bogo
+BASE=/home/$SUDO_USER/.local/share/ibus-bogo
 REPO=https://github.com/lewtds/ibus-ringo
 
 LICENSE='Xin chào, đây là bộ cài đặt ibus-ringo, một phần mềm tự do nguồn mở.
@@ -685,6 +685,12 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 '
 
+if [ $EUID -ne 0 ]
+then
+  echo -e $RED"Kịch bản này chỉ được chạy với người dùng có quyền hạn. Bạn hãy dùng sudo !"$RED
+  exit 1
+fi
+
 echo "$LICENSE" | zenity --text-info \
     --title="Điều khoản sử dụng ibus-ringo" \
     --width=550 \
@@ -694,7 +700,7 @@ echo "$LICENSE" | zenity --text-info \
 
 if [ $? -ne 0 ]
 then
-    exit
+    exit 1
 fi
 
 is_supported_debian_family()
@@ -713,8 +719,8 @@ then
 	if [ $? -eq 0 ]
 	then
 		echo \# Gỡ cài đặt ibus-bogo...
-		gksudo "apt-get remove ibus-bogo --assume-yes" --message "Vui lòng nhập mật khẩu để gỡ cài đặt ibus-bogo đã có sẵn trong máy."
-		[ $? -ne 0 ] && exit
+		apt-get remove ibus-bogo --assume-yes
+		[ $? -ne 0 ] && exit 1
 	fi
 
 	echo \# Cài đặt phần mềm phụ thuộc...
@@ -723,8 +729,8 @@ then
 	dpkg --status $DEPS > /dev/null
 	if [ $? -ne 0 ]
 	then
-		gksudo "apt-get install $DEPS"
-		[ $? -ne 0 ] && exit
+		apt-get install $DEPS
+		[ $? -ne 0 ] && exit 1
 	fi
 else
 	zenity --error \
@@ -734,17 +740,17 @@ fi
 
 echo \# Đang tải ibus-ringo về $BASE...
 
-git clone $REPO $BASE
+sudo -u $SUDO_USER git clone $REPO $BASE
 cd $BASE
 
-git reset --hard HEAD
-git pull
-git submodule init
-git submodule update
+sudo -u $SUDO_USER git reset --hard HEAD
+sudo -u $SUDO_USER git pull
+sudo -u $SUDO_USER git submodule init
+sudo -u $SUDO_USER git submodule update
 
 
 # FIXME: This is duplicated from gui/ibus-setup-bogo.desktop
-cat > ~/.local/share/applications/ibus-bogo-setup.desktop <<EOF
+cat > /home/$SUDO_USER/.local/share/applications/ibus-bogo-setup.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Name=BoGo Settings (unstable)
@@ -755,21 +761,21 @@ Type=Application
 Categories=Utility;
 EOF
 
-gksudo "sh -c 'cp $BASE/ibus_engine/data/bogo.xml /usr/share/ibus/component && sed -e \"s|<exec>/usr/lib/ibus-bogo/ibus-engine-bogo --ibus</exec>|<exec>${BASE}/launcher.sh --ibus</exec>|\" --in-place /usr/share/ibus/component/bogo.xml'" --description "Bộ cài đặt ibus-ringo"
+cp $BASE/ibus_engine/data/bogo.xml /usr/share/ibus/component && sed -i "s|<exec>/usr/lib/ibus-bogo/ibus-engine-bogo --ibus</exec>|<exec>${BASE}/launcher.sh --ibus</exec>|"  /usr/share/ibus/component/bogo.xml
 
 if [ $? -ne 0 ]
 then
 	rm -r $BASE
-	rm ~/.local/share/applications/ibus-setup-bogo.desktop
-	exit
+	rm /home/$SUDO_USER/.local/share/applications/ibus-setup-bogo.desktop
+	exit 1
 fi
 
 echo \# Đang khởi động lại ibus...
 ibus-daemon --xim --daemonize --replace
 sleep 2
 
-echo 100
-) | zenity --progress \
+echo 100 \
+ | zenity --progress \
 	--title="Bộ cài đặt ibus-ringo" \
 	--pulsate \
 	--auto-close \
