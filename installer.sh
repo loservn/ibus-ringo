@@ -706,17 +706,19 @@ fi
 
 is_supported_debian_family()
 {
-	local is_ubuntu=false
-	local is_debian=false
-	[ "$DISTRO" = 'Ubuntu' ] && [ "$DISTRO_VERSION" = '14.04' -o "$DISTRO_VERSION" = '13.10' ] && is_ubuntu=true
-	[ "$DISTRO" = 'Debian' ] && [ "$DISTRO_VERSION" = 'unstable' ] && is_debian=true
-	[ $is_ubuntu = true -o $is_debian = true ] && echo 0 || echo 1
+	which apt-get > /dev/null > 2>&1
+	if [ $? -ne 0 ]
+	then
+		echo 1
+	else
+		echo 0
+	fi
 }
 
 (
-if [ `is_supported_debian_family` = '0' ]
+if [ $(is_supported_debian_family) = '0' ]
 then
-	dpkg --status ibus-bogo > /dev/null
+	dpkg get-selections | grep ibus-bogo > /dev/null
 	if [ $? -eq 0 ]
 	then
 		echo \# Gỡ cài đặt ibus-bogo...
@@ -776,7 +778,7 @@ ibus-daemon --xim --daemonize --replace
 sleep 2
 
 echo 100 \
- | zenity --progress \
+) | zenity --progress \
 	--title="Bộ cài đặt ibus-ringo" \
 	--pulsate \
 	--auto-close \
