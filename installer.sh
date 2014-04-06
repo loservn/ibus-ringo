@@ -718,13 +718,18 @@ is_supported_debian_family()
 
 is_supported_archlinux_family()
 {
-  [ "$DISTRO" = 'Arch' ] && echo 0 || echo 1
-  pacman -Q zenity > /dev/null 2>&1
-  if [ $? -ne 0 ]
-  then
-    echo \# Đang cài đặt zenity...
-    pacman -S zenity > /dev/null 2>&1
-  fi
+	if [ "$DISTRO" = 'Arch' ]
+  	then 
+  		echo 0
+  		pacman -Q zenity > /dev/null 2>&1
+  		if [ $? -ne 0 ]
+  		then
+    			echo \# Đang cài đặt zenity...
+    			pacman -S zenity > /dev/null 2>&1
+  		fi
+  	else
+		echo 1
+  	fi
 }
 
 (
