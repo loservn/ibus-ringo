@@ -2,8 +2,9 @@
 
 DISTRO=`lsb_release --short --id`
 DISTRO_VERSION=`lsb_release --short --release`
-BASE=~/.local/share/ibus-bogo
+BASE=/home/$SUDO_USER/.local/share/ibus-bogo
 REPO=https://github.com/lewtds/ibus-ringo
+RED="\e[1;31m"
 
 LICENSE='Xin chào, đây là bộ cài đặt ibus-ringo, một phần mềm tự do nguồn mở.
 để sử dụng, bạn cần đồng ý với những điều khoản sau.
@@ -685,6 +686,12 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 '
 
+if [ $EUID -ne 0 ]
+then
+  echo -e $RED"Bạn cần chạy bộ cài đặt này với lệnh sudo."$RED
+  exit 1
+fi
+
 echo "$LICENSE" | zenity --text-info \
     --title="Điều khoản sử dụng ibus-ringo" \
     --width=550 \
@@ -694,7 +701,7 @@ echo "$LICENSE" | zenity --text-info \
 
 if [ $? -ne 0 ]
 then
-    exit
+    exit 1
 fi
 
 is_supported_debian_family()
@@ -706,6 +713,17 @@ is_supported_debian_family()
 	[ $is_ubuntu = true -o $is_debian = true ] && echo 0 || echo 1
 }
 
+is_supported_archlinux_family()
+{
+  [ "$DISTRO" = 'Arch' ] && echo 0 || echo 1
+  pacman -Q zenity > /dev/null 2>&1
+  if [ $? -ne 0 ]
+  then
+    echo \# Đang cài đặt zenity...
+    pacman -S zenity > /dev/null 2>&1
+  fi
+}
+
 (
 if [ `is_supported_debian_family` = '0' ]
 then
@@ -713,8 +731,8 @@ then
 	if [ $? -eq 0 ]
 	then
 		echo \# Gỡ cài đặt ibus-bogo...
-		gksudo "apt-get remove ibus-bogo --assume-yes" --message "Vui lòng nhập mật khẩu để gỡ cài đặt ibus-bogo đã có sẵn trong máy."
-		[ $? -ne 0 ] && exit
+		apt-get remove ibus-bogo --assume-yes
+		[ $? -ne 0 ] && exit 1
 	fi
 
 	echo \# Cài đặt phần mềm phụ thuộc...
@@ -723,28 +741,48 @@ then
 	dpkg --status $DEPS > /dev/null
 	if [ $? -ne 0 ]
 	then
-		gksudo "apt-get install $DEPS"
-		[ $? -ne 0 ] && exit
+		apt-get install $DEPS
+		[ $? -ne 0 ] && exit 1
 	fi
+elif [ "$(is_supported_archlinux_family)" = "0" ] 
+then
+  DEPS="ibus python python-gobject libwnck3 python-pyqt4 libnotify qt4 git"
+  pacman -Q ibus-bogo > /dev/null 2>&1
+  if [ $? -ne 0 ]
+  then
+    echo \# Gỡ cài đặt ibus-bogo...
+    pacman -R ibus-bogo
+  fi
+  pacman -Q $DEPS > /dev/null
+  if [ $? -ne 0 ]
+  then
+    pacman -S $DEPS > /dev/null
+  fi
 else
 	zenity --error \
 		--text="Xin lỗi. Bản phân phối Linux của bạn không được hỗ trợ."
-	exit
+	exit 1
 fi
 
 echo \# Đang tải ibus-ringo về $BASE...
 
-git clone $REPO $BASE
+# check $Base directory exist...
+if [ ! -d $BASE ]
+then
+  sudo -u $SUDO_USER git clone $REPO $BASE
+fi
+
 cd $BASE
 
-git reset --hard HEAD
-git pull
-git submodule init
-git submodule update
+sudo -u $SUDO_USER git reset --hard HEAD
+sudo -u $SUDO_USER git pull
+sudo -u $SUDO_USER git submodule init
+sudo -u $SUDO_USER git submodule update
 
-
+# make sure /home/$SUDO_USER/.local/share/applications exists...
+mkdir -p /home/$SUDO_USER/.local/share/applications
 # FIXME: This is duplicated from gui/ibus-setup-bogo.desktop
-cat > ~/.local/share/applications/ibus-bogo-setup.desktop <<EOF
+cat > /home/$SUDO_USER/.local/share/applications/ibus-bogo-setup.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
 Name=BoGo Settings (unstable)
@@ -755,13 +793,13 @@ Type=Application
 Categories=Utility;
 EOF
 
-gksudo "sh -c 'cp $BASE/ibus_engine/data/bogo.xml /usr/share/ibus/component && sed -e \"s|<exec>/usr/lib/ibus-bogo/ibus-engine-bogo --ibus</exec>|<exec>${BASE}/launcher.sh --ibus</exec>|\" --in-place /usr/share/ibus/component/bogo.xml'" --description "Bộ cài đặt ibus-ringo"
+cp $BASE/ibus_engine/data/bogo.xml /usr/share/ibus/component && sed -i "s|<exec>/usr/lib/ibus-bogo/ibus-engine-bogo --ibus</exec>|<exec>${BASE}/launcher.sh --ibus</exec>|" /usr/share/ibus/component/bogo.xml
 
 if [ $? -ne 0 ]
 then
 	rm -r $BASE
-	rm ~/.local/share/applications/ibus-setup-bogo.desktop
-	exit
+	rm /home/$SUDO_USER/.local/share/applications/ibus-setup-bogo.desktop
+	exit 1
 fi
 
 echo \# Đang khởi động lại ibus...
