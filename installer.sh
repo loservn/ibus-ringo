@@ -692,17 +692,20 @@ then
   exit 1
 fi
 
-echo "$LICENSE" | zenity --text-info \
-    --title="Điều khoản sử dụng ibus-ringo" \
-    --width=550 \
-    --height=400 \
-    --ok-label="Tôi đồng ý" \
-    --cancel-label="Tôi không đồng ý"
+license()
+{
+  echo "$LICENSE" | zenity --text-info \
+      --title="Điều khoản sử dụng ibus-ringo" \
+      --width=550 \
+      --height=400 \
+      --ok-label="Tôi đồng ý" \
+      --cancel-label="Tôi không đồng ý"
 
-if [ $? -ne 0 ]
-then
+  if [ $? -ne 0 ]
+  then
     exit 1
-fi
+  fi
+}
 
 is_supported_debian_family()
 {
@@ -727,6 +730,7 @@ is_supported_archlinux_family()
 (
 if [ `is_supported_debian_family` = '0' ]
 then
+  license
 	dpkg --status ibus-bogo > /dev/null
 	if [ $? -eq 0 ]
 	then
@@ -746,6 +750,7 @@ then
 	fi
 elif [ "$(is_supported_archlinux_family)" = "0" ] 
 then
+  license
   DEPS="ibus python python-gobject libwnck3 python-pyqt4 libnotify qt4 git"
   pacman -Q ibus-bogo > /dev/null 2>&1
   if [ $? -ne 0 ]
