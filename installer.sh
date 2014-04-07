@@ -692,7 +692,7 @@ then
   exit 1
 fi
 
-license()
+show_license()
 {
   echo "$LICENSE" | zenity --text-info \
       --title="Điều khoản sử dụng ibus-ringo" \
@@ -726,11 +726,11 @@ is_supported_archlinux_family()
     pacman -S zenity > /dev/null 2>&1
   fi
 }
-
+  
 (
 if [ `is_supported_debian_family` = '0' ]
 then
-  license
+  show_license
 	dpkg --status ibus-bogo > /dev/null
 	if [ $? -eq 0 ]
 	then
@@ -750,7 +750,7 @@ then
 	fi
 elif [ "$(is_supported_archlinux_family)" = "0" ] 
 then
-  license
+  show_license
   DEPS="ibus python python-gobject libwnck3 python-pyqt4 libnotify qt4 git"
   pacman -Q ibus-bogo > /dev/null 2>&1
   if [ $? -ne 0 ]
@@ -785,7 +785,7 @@ sudo -u $SUDO_USER git submodule init
 sudo -u $SUDO_USER git submodule update
 
 # make sure /home/$SUDO_USER/.local/share/applications exists...
-mkdir -p /home/$SUDO_USER/.local/share/applications
+sudo -u $SUDO_USER mkdir -p /home/$SUDO_USER/.local/share/applications
 # FIXME: This is duplicated from gui/ibus-setup-bogo.desktop
 cat > /home/$SUDO_USER/.local/share/applications/ibus-bogo-setup.desktop <<EOF
 [Desktop Entry]
