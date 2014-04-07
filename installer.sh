@@ -787,17 +787,15 @@ sudo -u $SUDO_USER git submodule update
 # make sure /home/$SUDO_USER/.local/share/applications exists...
 sudo -u $SUDO_USER mkdir -p /home/$SUDO_USER/.local/share/applications
 # FIXME: This is duplicated from gui/ibus-setup-bogo.desktop
-sudo -u $SUDO_USER cat > /home/$SUDO_USER/.local/share/applications/ibus-bogo-setup.desktop <<EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=BoGo Settings (unstable)
-Comment=Settings for the ibus-bogo the Vietnamese input method
-Exec=python3 ${BASE}/gui/controller.py
-Icon=ibus-bogo
-Type=Application
-Categories=Utility;
-EOF
-
+ENTRY='[Desktop Entry]\n
+Encoding=UTF-8\n
+Name=BoGo Settings (unstable)\n
+Comment=Settings for the ibus-bogo the Vietnamese input method\n
+Exec=python3 ${BASE}/gui/controller.py\n
+Icon=ibus-bogo\n
+Type=Application\n
+Categories=Utility;\n'
+echo -e $ENTRY | sudo -u $SUDO_USER tee /home/$SUDO_USER/.local/share/applications/ibus-bogo-setup.desktop
 cp $BASE/ibus_engine/data/bogo.xml /usr/share/ibus/component && sed -i "s|<exec>/usr/lib/ibus-bogo/ibus-engine-bogo --ibus</exec>|<exec>${BASE}/launcher.sh --ibus</exec>|" /usr/share/ibus/component/bogo.xml
 
 if [ $? -ne 0 ]
