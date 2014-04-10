@@ -806,7 +806,7 @@ then
 fi
 
 echo \# Đang khởi động lại ibus...
-ibus-daemon --xim --daemonize --replace
+sudo -u $SUDO_USER ibus-daemon --xim --daemonize --replace
 sleep 2
 
 echo 100
