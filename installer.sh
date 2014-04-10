@@ -5,7 +5,7 @@ DISTRO_VERSION=`lsb_release --short --release`
 BASE=/home/$SUDO_USER/.local/share/ibus-bogo
 REPO=https://github.com/lewtds/ibus-ringo
 RED="\e[1;31m"
-
+RESET="\e[0m"
 LICENSE='Xin chào, đây là bộ cài đặt ibus-ringo, một phần mềm tự do nguồn mở.
 để sử dụng, bạn cần đồng ý với những điều khoản sau.
 
@@ -688,7 +688,7 @@ Public License instead of this License.  But first, please read
 
 if [ $EUID -ne 0 ]
 then
-  echo -e $RED"Bạn cần chạy bộ cài đặt này với lệnh sudo."$RED
+  echo -e $RED"Bạn cần chạy bộ cài đặt này với lệnh sudo."$RESET
   exit 1
 fi
 
