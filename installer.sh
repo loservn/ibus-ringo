@@ -711,6 +711,10 @@ check_flags () {
   [ ! -d $BASE ] && show_license
 }
 
+install_zenity_Arch () {
+  echo \# Đang cài đặt zenity...
+  pacman -S zenity --noconfirm
+}
 [ "$DISTRO" = "Ubuntu" ] && DISTRO="Debian GNU/Linux"
 
 # Template install_${SUPPORTED_DISTRO["key"]}
@@ -740,12 +744,6 @@ install_Debian () {
 }
 
 install_Arch () {
-  type zenity  > /dev/null 2>&1 # Check zenity, because of not installing by default
-  if [ $? -ne 0 ]
-    then
-      echo \# Đang cài đặt zenity...
-      pacman -S zenity --noconfirm
-  fi
   check_flags
   DEPS="ibus python python-gobject libwnck3 python-pyqt4 libnotify qt4 git"
   pacman -Q ibus-bogo > /dev/null 2>&1
@@ -801,6 +799,8 @@ install_bogo () {
   echo 100
   sleep 2
 }
+
+type zenity > /dev/null 2>&1 || install_zenity_${SUPPORTED_DISTRO["$DISTRO"]}
 
 (install_${SUPPORTED_DISTRO["$DISTRO"]}) | zenity --progress \
 	--title="Bộ cài đặt ibus-ringo" \
