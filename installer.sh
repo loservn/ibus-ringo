@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # set -u # Debug if unbound veriable exists.
-source /etc/os-release > /dev/null 2>&1 || echo $RED"Không thể xác định bản phân phối của bạn. Bạn hãy kiểm tra /etc/os-release."$RESET
+[ ! -f /etc/os-release ] && echo "Không thể xác định bản phân phối của bạn. Bạn hãy kiểm tra /etc/os-release." && exit 1
+source /etc/os-release
 DISTRO=$NAME
 DISTRO_VERSION=$VERSION_ID
 BASE=/home/$SUDO_USER/.local/share/ibus-bogo
