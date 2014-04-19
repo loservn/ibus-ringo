@@ -711,7 +711,7 @@ check_flags () {
   [ ! -d $BASE ] && show_license
 }
 
-[ "$DISTRO" = "Ubuntu" ] && $DISTRO="Debian"
+[ "$DISTRO" = "Ubuntu" ] && DISTRO="Debian"
 
 # Template install_${SUPPORTED_DISTRO["key"]}
 install_Debian () {
