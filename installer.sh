@@ -758,6 +758,7 @@ install_Arch () {
   then
     install_bogo
   else
+    echo \# Cài đặt phần mềm phụ thuộc...
     pacman -S $DEPS --noconfirm || exit 1
     install_bogo
   fi
