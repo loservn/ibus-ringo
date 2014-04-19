@@ -12,7 +12,7 @@ BASE=/home/$SUDO_USER/.local/share/ibus-bogo
 REPO=https://github.com/lewtds/ibus-ringo
 RED="\e[1;31m"
 RESET="\e[0m"
-declare -A SUPPORTED_DISTRO=(["Arch Linux"]="Arch" ["Debian GNU/Linux"]="Debian" ["Ubuntu"]="Ubuntu")
+declare -A SUPPORTED_DISTRO=(["Arch Linux"]="arch" ["Debian GNU/Linux"]="debian" ["Ubuntu"]="ubuntu")
 
 LICENSE='Xin chào, đây là bộ cài đặt ibus-ringo, một phần mềm tự do nguồn mở.
 để sử dụng, bạn cần đồng ý với những điều khoản sau.
@@ -715,14 +715,14 @@ check_flags () {
   [ ! -d $BASE ] && show_license
 }
 
-install_zenity_Arch () {
+install_zenity_arch () {
   echo \# Đang cài đặt zenity...
   pacman -S zenity --noconfirm
 }
 [ "$DISTRO" = "Ubuntu" ] && DISTRO="Debian GNU/Linux"
 
 # Template install_${SUPPORTED_DISTRO["key"]}
-install_Debian () {
+install_debian () {
   check_flags
   dpkg --status ibus-bogo > /dev/null 2>&1
   if [ $? -eq 0 ]
@@ -747,7 +747,7 @@ install_Debian () {
   fi
 }
 
-install_Arch () {
+install_arch () {
   check_flags
   DEPS="ibus python python-gobject libwnck3 python-pyqt4 libnotify qt4 git"
   pacman -Q ibus-bogo > /dev/null 2>&1
