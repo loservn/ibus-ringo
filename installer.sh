@@ -690,7 +690,7 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 '
 
-[ ! ${SUPPORTED_DISTRO["$DISTRO"]} ] && echo $RED"Xin lỗi bản phân phối của bạn không được hỗ trợ."$RESET && exit 1
+[ ! ${SUPPORTED_DISTRO["$DISTRO"]} ] && echo $RED"Xin lỗi. Bản phân phối của bạn không được hỗ trợ."$RESET && exit 1
 
 [ $EUID -ne 0 ] && echo -e $RED"Bạn cần chạy bộ cài đặt này với lệnh sudo."$RESET && exit 1
 
