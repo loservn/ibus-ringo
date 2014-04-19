@@ -16,7 +16,6 @@ LICENSE='Xin chào, đây là bộ cài đặt ibus-ringo, một phần mềm t�
 
                      GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
-"Debian GNU/Linux"
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
