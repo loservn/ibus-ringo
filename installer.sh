@@ -800,7 +800,7 @@ install_bogo () {
 
 	echo \# Đang khởi động lại ibus...
 	sudo -u $SUDO_USER ibus-daemon --xim --daemonize --replace
-
+    sleep 2
 	echo 100
 	sleep 2
 }
