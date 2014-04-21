@@ -1,11 +1,10 @@
 #!/bin/bash
 
 set -u # Debug if unbound variable exists.
-
+VERSION_ID=""
 [ ! -f /etc/os-release ] && echo "Không thể xác định bản phân phối của bạn. Bạn hãy kiểm tra /etc/os-release." && exit 1
 source /etc/os-release
 
-VERSION_ID=""
 DISTRO=$NAME
 DISTRO_VERSION=$VERSION_ID
 BASE=/home/$SUDO_USER/.local/share/ibus-bogo
