@@ -1,0 +1,25 @@
+From 32267785f57a90adcbba2e70cddcf25222c56676 Mon Sep 17 00:00:00 2001
+From: NgoHuy <huynhok.uit@gmail.com>
+Date: Sat, 19 Apr 2014 14:36:59 +0700
+Subject: [PATCH 3/3] Correct  => DISTRO for variable
+
+---
+ installer.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/installer.sh b/installer.sh
+index 1319af5..e1ba5c1 100755
+--- a/installer.sh
++++ b/installer.sh
+@@ -711,7 +711,7 @@ check_flags () {
+   [ ! -d $BASE ] && show_license
+ }
+ 
+-[ "$DISTRO" = "Ubuntu" ] && $DISTRO="Debian"
++[ "$DISTRO" = "Ubuntu" ] && DISTRO="Debian"
+ 
+ # Template install_${SUPPORTED_DISTRO["key"]}
+ install_Debian () {
+-- 
+1.9.2
+
