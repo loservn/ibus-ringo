@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -u # Debug if unbound variable exists.
+set -k # prevent variables modification from command line
+
 VERSION_ID=""
 [ ! -f /etc/os-release ] && echo "Không thể xác định bản phân phối của bạn. Bạn hãy kiểm tra /etc/os-release." && exit 1
 source /etc/os-release
