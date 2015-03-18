@@ -1,4 +1,5 @@
 #!/bin/bash
+# Credit: Anh K.Huynh for security fix
 
 set -u # Debug if unbound variable exists.
 set -k # prevent variables modification from command line
